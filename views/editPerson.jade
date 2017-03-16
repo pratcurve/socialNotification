@@ -1,66 +1,66 @@
 html
-	head
-		title Edit Table
-		link(rel='stylesheet' href='/css/bootstrap.min.css')
-		link(rel='stylesheet' href='/css/bootstrap.css')
-	body
-		.container
-			form(method='post', name= 'editForm')
-				.form-group
-					label(for= 'rowId') Row Id:
-					select#select.form-control(name= 'person_id')
-						option(name= "" value = "")  
-						each rowId in rowIds
-							option(value= rowId.person_id) #{rowId.person_id}
-				.form-group
-					label(for= 'personName') Name:
-					input#name.form-control(type= 'text', name= 'personName', placeholder= 'Name')
-				.form-group
-					label(for= 'mobile') Mobile Number:
-					input#mobile.form-control(type= 'text', name= 'number', placeholder= 'Number')
-				button.btn.btn-default(type= 'submit', onClick= 'return target_insert();') Insert
-				button.btn.btn-default(type= 'submit', onClick= 'return target_update();') Update
-				button.btn.btn-default(type= 'submit', onClick= 'return target_delete();') Delete
-			p *Select row id if updating or deleting, in case of insertions leave it blank.
-		script.
-			function target_insert() {
-				var name = document.forms['editForm']['name'].value;
-				var number = document.forms['editForm']['number'].value;
-				if(name == "" || number == "") {
-					alert("Please fill all the fields");
-					return false;
-				}
-				document.editForm.action= '/person/Insert';
-				document.editForm.submit();
-				return true;
-			}
+  head
+    title Edit Table
+    link(rel='stylesheet' href='/css/bootstrap.min.css')
+    link(rel='stylesheet' href='/css/bootstrap.css')
+  body
+    .container
+      form(method='post', name= 'editForm')
+        .form-group
+          label(for= 'rowId') Row Id:
+          select#select.form-control(name= 'person_id')
+            option(name= "" value = "")  
+            each rowId in rowIds
+              option(value= rowId.person_id) #{rowId.person_id}
+        .form-group
+          label(for= 'personName') Name:
+          input#name.form-control(type= 'text', name= 'personName', placeholder= 'Name')
+        .form-group
+          label(for= 'mobile') Mobile Number:
+          input#mobile.form-control(type= 'text', name= 'number', placeholder= 'Number')
+        button.btn.btn-default(type= 'submit', onClick= 'return target_insert();') Insert
+        button.btn.btn-default(type= 'submit', onClick= 'return target_update();') Update
+        button.btn.btn-default(type= 'submit', onClick= 'return target_delete();') Delete
+      p *Select row id if updating or deleting, in case of insertions leave it blank.
+    script.
+      function target_insert() {
+        var name = document.forms['editForm']['name'].value;
+        var number = document.forms['editForm']['number'].value;
+        if(name == "" || number == "") {
+          alert("Please fill all the fields");
+          return false;
+        }
+        document.editForm.action= '/person/Insert';
+        document.editForm.submit();
+        return true;
+      }
 
-			function target_update() {
-				var rowId = document.forms['editForm']['person_id'].value;
-				var name = document.forms['editForm']['name'].value;
-				var number = document.forms['editForm']['number'].value;				
-				if(rowId == "") {
-					alert("Please select row Id");
-					return false;
-				}
-				if(name == "" && number == "") {
-					alert("Enter some value to update");
-					return false;
-				}
-				document.editForm.action= '/person/update';
-				document.editForm.submit();
-				return true;
-			}
+      function target_update() {
+        var rowId = document.forms['editForm']['person_id'].value;
+        var name = document.forms['editForm']['name'].value;
+        var number = document.forms['editForm']['number'].value;        
+        if(rowId == "") {
+          alert("Please select row Id");
+          return false;
+        }
+        if(name == "" && number == "") {
+          alert("Enter some value to update");
+          return false;
+        }
+        document.editForm.action= '/person/update';
+        document.editForm.submit();
+        return true;
+      }
 
-			function target_delete() {
-				var rowId = document.forms['editForm']['person_id'].value;
-				if(rowId == "") {
-					alert("Please select row Id");
-					return false;
-				}
-				document.editForm.action= '/person/delete';
-				document.editForm.submit();
-				return true;
-			}
+      function target_delete() {
+        var rowId = document.forms['editForm']['person_id'].value;
+        if(rowId == "") {
+          alert("Please select row Id");
+          return false;
+        }
+        document.editForm.action= '/person/delete';
+        document.editForm.submit();
+        return true;
+      }
 
 

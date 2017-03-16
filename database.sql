@@ -8,7 +8,7 @@ create table user (user_id int(10) NOT NULL AUTO_INCREMENT, email text, fcm text
 
 -- //create subscribe table in notify database
 create table subscribe (subscribe_id int NOT NULL AUTO_INCREMENT, user_id int, subscribe_table text(255), subscribe_coloumn text(255),
-		primary key (subscribe_id), foreign key(user_id) References user(user_id) ON DELETE CASCADE)
+    primary key (subscribe_id), foreign key(user_id) References user(user_id) ON DELETE CASCADE)
 
 -- create database social of which tables can be subscribe_id
 create database social;

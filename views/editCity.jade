@@ -1,71 +1,71 @@
 html
-	head
-		title Edit Table
-		link(rel='stylesheet' href='/css/bootstrap.min.css')
-		link(rel='stylesheet' href='/css/bootstrap.css')
-	body
-		.container
-			form(method='post', name= 'editForm')
-				.form-group
-					label(for= 'rowId') Row Id:
-					select#select.form-control(name= 'city_id' onChange= 'selectCity(this.value)')
-						option(value= "" name="") 
-						each rowId in rowIds
-							option(value= rowId.city_id) #{rowId.city_id}
-				.form-group
-					label(for= 'city') City Name:
-					input#name.form-control(type= 'text', name= 'city', placeholder= 'City Name')
-				.form-group
-					label(for= 'state') State:
-					input#name.form-control(type= 'text', name= 'state', placeholder= 'State')
-				.form-group
-					label(for= 'pincode') Pincode:
-					input#pincode.form-control(type= 'text', name= 'pincode', placeholder= 'Pincode')
-				button.btn.btn-default(type= 'submit', onClick= 'return target_insert();') Insert
-				button.btn.btn-default(type= 'submit', onClick= 'return target_update();') Update
-				button.btn.btn-default(type= 'submit', onClick= 'return target_delete();') Delete
-			p *Select row id if updating or deleting, in case of insertion leave it blank.			
-		script.
-			function target_insert() {
-				var city = document['editForm']['city'].value;
-				var state = document['editForm']['state'].value;
-				var pincode = document['editForm']['pincode'].value;
-				if(city == "" || state == "" || pincode == "") {
-					alert("Please fill all fields");
-					return false;
-				}
-				document.editForm.action= '/city/Insert';
-				document.editForm.submit();
-				return true;
-			}
+  head
+    title Edit Table
+    link(rel='stylesheet' href='/css/bootstrap.min.css')
+    link(rel='stylesheet' href='/css/bootstrap.css')
+  body
+    .container
+      form(method='post', name= 'editForm')
+        .form-group
+          label(for= 'rowId') Row Id:
+          select#select.form-control(name= 'city_id' onChange= 'selectCity(this.value)')
+            option(value= "" name="") 
+            each rowId in rowIds
+              option(value= rowId.city_id) #{rowId.city_id}
+        .form-group
+          label(for= 'city') City Name:
+          input#name.form-control(type= 'text', name= 'city', placeholder= 'City Name')
+        .form-group
+          label(for= 'state') State:
+          input#name.form-control(type= 'text', name= 'state', placeholder= 'State')
+        .form-group
+          label(for= 'pincode') Pincode:
+          input#pincode.form-control(type= 'text', name= 'pincode', placeholder= 'Pincode')
+        button.btn.btn-default(type= 'submit', onClick= 'return target_insert();') Insert
+        button.btn.btn-default(type= 'submit', onClick= 'return target_update();') Update
+        button.btn.btn-default(type= 'submit', onClick= 'return target_delete();') Delete
+      p *Select row id if updating or deleting, in case of insertion leave it blank.      
+    script.
+      function target_insert() {
+        var city = document['editForm']['city'].value;
+        var state = document['editForm']['state'].value;
+        var pincode = document['editForm']['pincode'].value;
+        if(city == "" || state == "" || pincode == "") {
+          alert("Please fill all fields");
+          return false;
+        }
+        document.editForm.action= '/city/Insert';
+        document.editForm.submit();
+        return true;
+      }
 
-			function target_update() {
-				var rowId = document['editForm']['city_id'].value;
-				var city = document['editForm']['city'].value;
-				var state = document['editForm']['state'].value;
-				var pincode = document['editForm']['pincode'].value;
-				if(rowId == ""){
-					alert('Please select row Id');
-					return false;
-				}
-				if(city == "" && state == "" && pincode == "") {
-					alert("Please fill atleast one field to update");
-					return false;
-				}
-				document.editForm.action= '/city/update';
-				document.editForm.submit();
-				return true;
-			}
+      function target_update() {
+        var rowId = document['editForm']['city_id'].value;
+        var city = document['editForm']['city'].value;
+        var state = document['editForm']['state'].value;
+        var pincode = document['editForm']['pincode'].value;
+        if(rowId == ""){
+          alert('Please select row Id');
+          return false;
+        }
+        if(city == "" && state == "" && pincode == "") {
+          alert("Please fill atleast one field to update");
+          return false;
+        }
+        document.editForm.action= '/city/update';
+        document.editForm.submit();
+        return true;
+      }
 
-			function target_delete() {
-				var rowId = document['editForm']['city_id'].value;
-				if(rowId == "") {
-					alert("Please select row Id");
-					return false;
-				}
-				document.editForm.action= '/city/delete';
-				document.editForm.submit();
-				return true;
-			}
+      function target_delete() {
+        var rowId = document['editForm']['city_id'].value;
+        if(rowId == "") {
+          alert("Please select row Id");
+          return false;
+        }
+        document.editForm.action= '/city/delete';
+        document.editForm.submit();
+        return true;
+      }
 
 
