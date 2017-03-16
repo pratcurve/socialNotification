@@ -1,0 +1,46 @@
+html
+	head
+		title Express App
+		link(rel='stylesheet' href='/css/bootstrap.min.css')
+		link(rel='stylesheet' href='/css/bootstrap.css')				  
+	body
+		ul#rows
+			each result in results
+				li#table 
+					a(href='/#{result.Tables_in_social}/edit')= result.Tables_in_social
+			li
+				a(href='/logout') Logout
+		p(style= 'margin: 5px') *click on the table name above to edit.
+		.container
+			form(method='POST', action="/subscribe")
+				.form-group
+					label(for= 'subscribeTable') Select a table to subscribe to:	
+					select#select.form-control(name= 'selectPicker[]', onchange= 'getColumns(this.value)')
+						each result in results
+							option(value= result.Tables_in_social, name= result.Tables_in_social) #{result.Tables_in_social}
+					br
+					label(for= 'subscribeColumns') Select Columns to subscribe to:
+					select#columns.form-control.table(multiple= 'true', name= 'selectPickerCol[]')
+						each column in columns
+							option(value= column.Field, name= columns.Field) #{column.Field}
+					button.btn.btn-default(type= 'submit') Subscribe
+			p *Don't select columns if want to subscribe to table.
+			br
+			p NOTIFICATIONS: 
+				ul#notification
+		script.
+			function getColumns(tablename) {
+				var params = 'tablename='+tablename;
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						console.log(xhttp.responseText);
+						document.getElementById("columns").innerHTML = xhttp.responseText;
+					}
+				}
+				xhttp.open("POST", "http://localhost:3000/getColumns", true);
+				xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+				xhttp.send(params); 
+			}
+		script(src='https://www.gstatic.com/firebasejs/3.7.0/firebase.js')
+		script(src='/js/messaging.js')
