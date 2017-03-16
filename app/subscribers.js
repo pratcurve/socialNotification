@@ -2,7 +2,6 @@ var fcm = require('./fcm.js');
 
 //get user subscribed to person table or columns in person table and
 // call sendMessageToUser from fcm
-
 exports.getPersonSubscribers = function(data, notifyDb) {
 		var tableMessage = "";
 		var message = [];
@@ -134,5 +133,10 @@ exports.getCitySubscribers = function(data, notifyDb) {
 }
 
 function isEmpty(value) {
+<<<<<<< HEAD
 		return typeof value == 'string' && !value.trim() || typeof value == 'undefined' || value === null;
 }
+=======
+	return typeof value == 'string' && !value.trim() || typeof value == 'undefined' || value === null;
+}
+>>>>>>> fa2d1f0a68d0590c3300322db1ad0099e6772481
