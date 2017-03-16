@@ -3,18 +3,18 @@ Notification system using Node.js
 
 # Synopsis
 Basic functionality of a notification system is sending message message to a single user or a group of user. This application
-let user subscribe to tables or to the column of a table in a database. On change in database subscribers receive notifications.
+let user subscribe to tables or to the column of a table in a database on change in database subscribers receive notifications.
 
 # Approach
-Approach to the problem was dividing the problems in sub-problems like:
-User subscribe to table or column in a table.
-Track changes being made in database
-Fetch user from database depending on the field or table.
-Sending notification to the user
+### Approach to the problem was dividing the problems in sub-problems:
+- User subscribe to table or column in a table.
+- Track changes being made in database
+- Fetch user from database depending on the field or table.
+- Sending notification to the user
 
-Tools considered for the application was Node.js, Php, MySql, MongoDb, firebase and soket.io. Reason for opting Node.js over Php
-is because of vast modules or packages available on NPM which makes it easier to develop application more efficiently. MySql and 
-firebase is opted due to familarity with the tools.
+Tools considered for the application was Node.js, Php, MySql, MongoDb, firebase and soket.io. Reason for opting **Node.js** over Php
+is because of vast modules or packages available on NPM which makes it easier to develop application more efficiently. **MySql** and 
+**Firebase** is opted due to familarity with the tools.
 
 # Installation
 Clone or download repository from github (https://github.com/pratcurve/socialNotification.git). Make sure MySql and Node.js is
