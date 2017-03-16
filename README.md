@@ -77,4 +77,22 @@ From project root folder run command
 ```
 $ node server.js
 ```
-And the application will run on http://localhost:3000
+To access local host from machine other than the machine on which localhost is running, port forwarding has to be done for smooth working of application.<br>
+For port forwarding on linux: http://askubuntu.com/questions/320121/simple-port-forwarding
+on Windows: http://stackoverflow.com/questions/11525703/port-forwarding-in-windows
+```
+listenport=3000
+listenaddress=127.0.0.1
+connectport=3000
+connectaddress=ip4 server machine
+```
+
+And the application will run on http://localhost:3000. <br>
+# References
+express-session: https://github.com/expressjs/session<br>
+mysql: https://www.npmjs.com/package/mysql<br>
+stack overflow: http://stackoverflow.com/<br>
+node.js: https://nodejs.org/dist/latest-v6.x/docs/api/<br>
+Firebase: https://firebase.google.com/docs/database/web/start<br>
+XMLHttpRequest: https://www.w3schools.com/xml/xml_http.asp<br>
+
