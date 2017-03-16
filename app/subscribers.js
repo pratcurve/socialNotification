@@ -2,7 +2,6 @@ var fcm = require('./fcm.js');
 
 //get user subscribed to person table or columns in person table and
 // call sendMessageToUser from fcm
-
 exports.getPersonSubscribers = function(data, notifyDb) {
 	var tableMessage = "";
 	var message = [];
