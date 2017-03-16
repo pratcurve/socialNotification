@@ -53,7 +53,7 @@ module.exports = function(app, configDb, notifyDb, fcm, session, subscribers) {
 			};
 			req.session.user = results;
 			res.redirect('/');
-		});		
+		});   
 	});
 
 //Logout
@@ -162,7 +162,7 @@ module.exports = function(app, configDb, notifyDb, fcm, session, subscribers) {
 		configDb.insert(data, function(err, results) {
 			if (err) {
 				console.log(err);
-				res.end();	
+				res.end();  
 			};
 			data.action_done = 'insert';
 			data.row = results.insertId;
@@ -210,6 +210,6 @@ module.exports = function(app, configDb, notifyDb, fcm, session, subscribers) {
 	}
 
 	function isEmpty(value) {
-  		return typeof value == 'string' && !value.trim() || typeof value == 'undefined' || value === null;
+			return typeof value == 'string' && !value.trim() || typeof value == 'undefined' || value === null;
 	}
 }

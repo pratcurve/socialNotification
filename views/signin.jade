@@ -1,23 +1,23 @@
 html
-  head
-    title SignIn
-    link(rel='stylesheet' href='/css/bootstrap.min.css')
-    link(rel='stylesheet' href='/css/bootstrap.css')
-    script.
-      function validate() {
-        var email = document.getElementById('email').value;
-        if(email.length < 4) {
-          console.log("error")
-          document.getElementById('error').innerHTML = "Enter valid Email";
-          return false;
-        }
-        return true;
-      }
-  body
-    .container
-      form(method='post' action='/signin' name="signin" onSubmit = "return validate();")
-        .form-group
-          label(for= 'email') Email:
-          input#email.form-control(type= 'text', name= 'email', placeholder= 'Email')
-          p#error
-        button.btn.btn-default(type= 'submit') Sign In
+	head
+		title SignIn
+		link(rel='stylesheet' href='/css/bootstrap.min.css')
+		link(rel='stylesheet' href='/css/bootstrap.css')
+		script.
+			function validate() {
+				var email = document.getElementById('email').value;
+				if(email.length < 4) {
+					console.log("error")
+					document.getElementById('error').innerHTML = "Enter valid Email";
+					return false;
+				}
+				return true;
+			}
+	body
+		.container
+			form(method='post' action='/signin' name="signin" onSubmit = "return validate();")
+				.form-group
+					label(for= 'email') Email:
+					input#email.form-control(type= 'text', name= 'email', placeholder= 'Email')
+					p#error
+				button.btn.btn-default(type= 'submit') Sign In
