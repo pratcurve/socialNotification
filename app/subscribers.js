@@ -3,62 +3,62 @@ var fcm = require('./fcm.js');
 //get user subscribed to person table or columns in person table and
 // call sendMessageToUser from fcm
 exports.getPersonSubscribers = function(data, notifyDb) {
-    var tableMessage = "";
-    var message = [];
-    var updatedCol = [];
-    var token = "";
-    if (data.action_done == 'insert') {
-        tableMessage = "Data inserted into Person at row id: "+data.row+ ", Name: "+data.personName+" & Mobile: "+data.number;
-        message.push("New row added at id: " + data.row + "in Person");
-        message.push("Name: "+data.personName + " added at row id: "+data.row+" in table Person");
-        message.push("Mobile: "+data.number+" added at row id: "+data.row+" in table Person");
-        updatedCol = ['person_id','name', 'mobile'];
-    }
-    else if(data.action_done == 'update') {
-        tableMessage = "Data has been updated in Person at row id: "+data.row;
-        if(!isEmpty(data.personName)){
-            tableMessage += " with person name: "+data.personName;
-            updatedCol.push('name');
-            message.push("Name column updated, Person name: " + data.personName + " at row id: "+data.row);
-        }
-        if(!isEmpty(data.number)){
-            if (updatedCol.length >= 1) {
-                tableMessage += " & mobile: " + data.number;
-            } else {
-                tableMessage += " with mobile: " + data.number;
-            }
-            updatedCol.push('mobile');
-            message.push("Mobile column updated, Mobile: " + data.number + " at row id: "+data.row);
-        }
-    }
-    else if(data.action_done == 'delete') {
-        tableMessage = "Data deleted from Person, row id: "+data.row;
-        message.push("Row id: " + data.row + " deleted");
-        message.push("Person name deleted from row id: "+data.row);
-        message.push("Mobile deleted from row id: "+data.row);
-        updatedCol = ['person_id', 'name', 'mobile'];   
-    };
-        notifyDb.getSubscribers(data, function(err, subscribers) {
-        if (err) {
-            console.log(err);
-            return;
-        };
-        for(var i = 0; i < subscribers.length; i++) {
-            if (subscribers[i].subscribe_coloumn == null) {
-                token = subscribers[i].fcm;
-                fcm.sendMessageToUser(token, tableMessage);
-            }
-            else if (subscribers[i].subscribe_coloumn !== null) {
-                for(var j = 0; j < updatedCol.length; j++){
-                    if(subscribers[i].subscribe_coloumn == updatedCol[j]) {
-                        token = subscribers[i].fcm;
-                        fcm.sendMessageToUser(token, message[j]);
-                    }
-                }
-            }
-        }
-        return;
-    });
+  var tableMessage = "";
+  var message = [];
+  var updatedCol = [];
+  var token = "";
+  if (data.action_done == 'insert') {
+      tableMessage = "Data inserted into Person at row id: "+data.row+ ", Name: "+data.personName+" & Mobile: "+data.number;
+      message.push("New row added at id: " + data.row + "in Person");
+      message.push("Name: "+data.personName + " added at row id: "+data.row+" in table Person");
+      message.push("Mobile: "+data.number+" added at row id: "+data.row+" in table Person");
+      updatedCol = ['person_id','name', 'mobile'];
+  }
+  else if(data.action_done == 'update') {
+      tableMessage = "Data has been updated in Person at row id: "+data.row;
+      if(!isEmpty(data.personName)){
+          tableMessage += " with person name: "+data.personName;
+          updatedCol.push('name');
+          message.push("Name column updated, Person name: " + data.personName + " at row id: "+data.row);
+      }
+      if(!isEmpty(data.number)){
+          if (updatedCol.length >= 1) {
+              tableMessage += " & mobile: " + data.number;
+          } else {
+              tableMessage += " with mobile: " + data.number;
+          }
+          updatedCol.push('mobile');
+          message.push("Mobile column updated, Mobile: " + data.number + " at row id: "+data.row);
+      }
+  }
+  else if(data.action_done == 'delete') {
+      tableMessage = "Data deleted from Person, row id: "+data.row;
+      message.push("Row id: " + data.row + " deleted");
+      message.push("Person name deleted from row id: "+data.row);
+      message.push("Mobile deleted from row id: "+data.row);
+      updatedCol = ['person_id', 'name', 'mobile'];   
+  };
+      notifyDb.getSubscribers(data, function(err, subscribers) {
+      if (err) {
+          console.log(err);
+          return;
+      };
+      for(var i = 0; i < subscribers.length; i++) {
+          if (subscribers[i].subscribe_coloumn == null) {
+              token = subscribers[i].fcm;
+              fcm.sendMessageToUser(token, tableMessage);
+          }
+          else if (subscribers[i].subscribe_coloumn !== null) {
+              for(var j = 0; j < updatedCol.length; j++){
+                  if(subscribers[i].subscribe_coloumn == updatedCol[j]) {
+                      token = subscribers[i].fcm;
+                      fcm.sendMessageToUser(token, message[j]);
+                  }
+              }
+          }
+      }
+      return;
+  });
 }
 
 //get user subscribed to city table or columns in city table and
