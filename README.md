@@ -53,6 +53,8 @@ Npm will install all the modules required for the application mentioned in packa
   }
 }
 ```
+Use **database.sql** to create database and table in MySql
+
 Change user and password value in database connection in notifyDb.js
 ```
 var pool = mysql.createPool({
