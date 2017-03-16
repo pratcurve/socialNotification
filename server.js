@@ -5,15 +5,14 @@ var firebase = require('firebase');
 var bodyParser = require('body-parser');
 var request = require('request');
 
-//required dabtabse config file
+//required dabtabse config file and fcm file
 var configDb = require('./config/database.js');
 var notifyDb = require('./config/notifyDb.js');
 var fcm = require('./app/fcm.js');
 var subscribers = require('./app/subscribers.js');
 // require('./config/mysqlevents.js');
 
-//middleware to check authentication
-
+//Middleware
 app.use(session({secret: 'notify', httpOnly: false}));
 app.set('views', __dirname + '/views');
 app.use(express.static('public'));
@@ -21,7 +20,7 @@ app.set('view engine', 'jade');
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
-
+//CORS Access control origin, to access from other domain
 app.use(function(req, res, next){
 	res.setHeader('Access-Control-Allow-Origin', "*");
 
@@ -30,17 +29,14 @@ app.use(function(req, res, next){
 });
 
 
-//routes
+//app router
 require('./app/routes.js')(app, configDb, notifyDb, fcm, session, subscribers);
-
-// app.get('/', function(req, res){
-//   res.sendFile( __dirname + '/index.html');
-// });
 
 app.all('/', function(req, res) {
 	res.sendFile( __dirname + '/manifest.json');
 });
 
+//app listening on port 3000
 app.listen(3000, function(){
   console.log('listening on *:3000');
 });

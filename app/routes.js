@@ -1,5 +1,6 @@
 module.exports = function(app, configDb, notifyDb, fcm, session, subscribers) {
 
+//index route
 	app.get('/', isAuthenticated, function(req, res) {
 			configDb.getTables(function(err, results) {
 				if (err) {
@@ -19,6 +20,7 @@ module.exports = function(app, configDb, notifyDb, fcm, session, subscribers) {
 			});
 	});
 
+//getColumns route, to show table columns (XMLHttpRequest)
 	app.post('/getColumns', function(req, res) {
 		// console.log(req.body);
 		var response = "";
@@ -36,6 +38,7 @@ module.exports = function(app, configDb, notifyDb, fcm, session, subscribers) {
 		});
 	});
 
+//Sign in 
 	app.get('/signin', function(req, res) {
 		res.render('signin.jade');
 		res.end();
@@ -53,12 +56,13 @@ module.exports = function(app, configDb, notifyDb, fcm, session, subscribers) {
 		});		
 	});
 
+//Logout
 	app.get('/logout', isAuthenticated, function(req, res){
 		req.session.destroy();
 		res.redirect('/signin');
 	})
 
-	//post subscription route
+	//post subscription route, insert table or rows subscribed by the used in subscriber table.
 	app.post('/subscribe', isAuthenticated, function(req, res) {
 		var subscribeTable = req.body.selectPicker;
 		var subscribeCol = [];
@@ -77,6 +81,7 @@ module.exports = function(app, configDb, notifyDb, fcm, session, subscribers) {
 		});
 	});
 
+//update fcm token of respective user in database
 	app.post('/fcm', function(req, res) {
 		var data = req.body;
 		data.user_id = req.session.user;

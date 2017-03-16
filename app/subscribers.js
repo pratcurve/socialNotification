@@ -1,4 +1,8 @@
-var fcm = require('./fcm.js')
+var fcm = require('./fcm.js');
+
+//get user subscribed to person table or columns in person table and
+// call sendMessageToUser from fcm
+
 exports.getPersonSubscribers = function(data, notifyDb) {
 	var tableMessage = "";
 	var message = [];
@@ -7,8 +11,8 @@ exports.getPersonSubscribers = function(data, notifyDb) {
 	if (data.action_done == 'insert') {
 		tableMessage = "Data inserted into Person at row id: "+data.row+ ", Name: "+data.personName+" & Mobile: "+data.number;
 		message.push("New row added at id: " + data.row + "in Person");
-		message.push(data.personName + " added at row id: "+data.row+" in table Person");
-		message.push(data.number+" added at row id: "+data.row+" in table Person");
+		message.push("Name: "+data.personName + " added at row id: "+data.row+" in table Person");
+		message.push("Mobile: "+data.number+" added at row id: "+data.row+" in table Person");
 		updatedCol = ['person_id','name', 'mobile'];
 	}
 	else if(data.action_done == 'update') {
@@ -58,6 +62,8 @@ exports.getPersonSubscribers = function(data, notifyDb) {
 	});
 }
 
+//get user subscribed to city table or columns in city table and
+// call sendMessageToUser function form fcm
 exports.getCitySubscribers = function(data, notifyDb) {
 	var tableMessage = "";
 	var message = [];
@@ -66,9 +72,9 @@ exports.getCitySubscribers = function(data, notifyDb) {
 	if (data.action_done == 'insert') {
 		tableMessage = "Data inserted into City at row id: "+data.row+", values city name: "+data.city+", state: "+data.state+" & pincode: "+data.pincode;
 		message.push("New row added in City at id: " + data.row);
-		message.push(data.city + " added at row id: "+data.row+" in city");
-		message.push(data.state+" added at row id: "+data.row+" in city");
-		message.push(data.pincode+ " added at row id: "+data.row+" in city");
+		message.push("City: "+data.city + " added at row id: "+data.row+" in city");
+		message.push("State: "+data.state+" added at row id: "+data.row+" in city");
+		message.push("Pincode: "+data.pincode+ " added at row id: "+data.row+" in city");
 		updatedCol = ['city_id', 'city_name', 'state', 'pincode'];
 	}
 	else if(data.action_done == 'update') {

@@ -1,3 +1,5 @@
+//Database file for social table 
+
 var mysql      = require('mysql');
 var pool = mysql.createPool({
 	connectionLimit : 100,

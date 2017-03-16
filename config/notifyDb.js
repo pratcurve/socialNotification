@@ -1,5 +1,6 @@
 
 // database configuration file for notification database
+
 var mysql      = require('mysql');
 var pool = mysql.createPool({
 	connectionLimit : 100,
@@ -8,6 +9,7 @@ var pool = mysql.createPool({
   password : '2335171',
   database : 'notify',
 });
+
 
 exports.insertUser = function(email, callback) {
 	var sql = "Insert into user SET ?";
@@ -39,6 +41,9 @@ exports.insertUser = function(email, callback) {
 	});
 }
 
+
+//Updates fcm of user 
+
 exports.updateFcm = function(data, callback) {
 	var sql = "update user SET fcm = ? where user_id = ?";
 	var post = [data.token, data.user_id];
@@ -58,6 +63,7 @@ exports.updateFcm = function(data, callback) {
 	})
 }
 
+//insert table and coloumns subscribed by user
 exports.insertSubscribe = function(user_id, subscribeTable, subscribeCol, callback) {
 	var sql = "Insert into subscribe SET ?";
 	pool.getConnection(function(err, connection) {
@@ -92,6 +98,7 @@ exports.insertSubscribe = function(user_id, subscribeTable, subscribeCol, callba
 	});		
 }
 
+//Return subscriber of mentioned table
 exports.getSubscribers = function(data, callback) {
 	var sql = "SELECT user.user_id, user.email, user.fcm, subscribe.subscribe_table, subscribe.subscribe_coloumn " +
 				"FROM subscribe, user "+
